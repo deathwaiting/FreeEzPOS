@@ -1,4 +1,4 @@
-package io.galal;
+package io.galal.fre3zpos;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

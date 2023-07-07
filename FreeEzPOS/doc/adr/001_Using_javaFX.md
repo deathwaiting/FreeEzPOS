@@ -89,6 +89,13 @@ These requirements leaded to the following:
     - also, I am currently using maven, but kotlin projects works usually with gradle
     - So, I may need to split the UI project into a separate kotlin project just to use this ?
       - Let's try the FXML approach first
+  - [Stream-pi](https://github.com/stream-pi/client)
+    - This an interesting javaFx project that is cross-platform ,run on android, uses native builds, and internationalization.
+    - So, it provides features that can be useful to check
+  - [GluonFX] (https://gluonhq.com/developers/)
+    - Gluon implementation for javaFX
+    - Provide a plugin for building native executables for different platforms including android and IOS. Check this [example](https://github.com/gluonhq/gluon-samples/tree/master/HelloFX )
+    - This can be quite interesting and meets the project target, but we may add it latter.
 # Decision
 
 We try using javaFX
@@ -96,4 +103,9 @@ We try using javaFX
 # Consequences
 - a simple JavaFX app with basic libraries seems to take about 195 MB of ram on a 16 GB laptop
   - This is executed by the IDE, not a packaged application
+  - Tested it on packaged application and it is the same
+    - also, it seems running the same scene causes memory leak
+  - We may need the gluonFX native builds or add options to launch scripts to crub heap memory
 - Still experimenting, but may be we can reduce the heap size in the runners.
+- The application size of a trivial javaFX + embedded JRE is about 100 MB
+  - compressed , it is reduced to less than 47 MB, which is very nice in this age

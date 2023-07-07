@@ -1,4 +1,4 @@
-package io.galal;
+package io.galal.fre3zpos;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

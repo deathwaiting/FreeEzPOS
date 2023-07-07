@@ -4,10 +4,14 @@
     <groupId>io.galal</groupId>
     <artifactId>FreeEzPOS</artifactId>
     <version>1.0.0.SNAPSHOT</version>
+    <description>Opensource flexible POS system</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <main-module>io.galal.fre3zpos</main-module>
+        <main-class>io.galal.fre3zpos.App</main-class>
+        <jar-dir>${project.build.directory}/jar</jar-dir>
     </properties>
     <dependencies>
         <dependency>
@@ -59,7 +63,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>11</release>
+                    <release>17</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -72,7 +76,8 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>io.galal.App</mainClass>
+                            <!-- module name + main class fullname-->
+                            <mainClass>${main-module}/${main-class}</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -83,7 +88,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
                             </options>
-                            <mainClass>io.galal.App</mainClass>
+                            <mainClass>${main-class}</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -93,7 +98,8 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
                             </options>
-                            <mainClass>io.galal.App</mainClass>
+                            <!-- main class fullname-->
+                            <mainClass>${main-class}</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -102,6 +108,26 @@
                 <groupId>de.ronnyfriedland.maven</groupId>
                 <artifactId>adr-maven-plugin</artifactId>
                 <version>1.1.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>${jar-dir}</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <name>FreeEzPOS</name>
+                    <destination>${project.build.directory}/dist</destination>
+                    <input>${jar-dir}</input>
+                    <type>APP_IMAGE</type>
+<!--                    module name + main class fullname-->
+                    <module>${main-module}/${main-class}</module>
+                    <runtimeImage>${project.build.directory}/image</runtimeImage>
+                </configuration>
             </plugin>
         </plugins>
     </build>

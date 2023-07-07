@@ -28,5 +28,12 @@ FreeEzPOS hopes to provide a free solution to solve these concerns:
 - FreeEzPOS uses modern technologies, so, it has better UI's and better support in the foresible future.
 
 
-# 
+# For developers
+
+## building the project
+to create an app-image for the application with embedded JRE for the current platform
+```shell
+./mvnw clean package javafx:jlink jpackage:jpackage
+```
+**we may try to simplify this later in the pom**
 
